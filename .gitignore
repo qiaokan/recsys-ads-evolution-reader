@@ -1,0 +1,4 @@
+.vercel/
+.openai/
+.env*
+node_modules/

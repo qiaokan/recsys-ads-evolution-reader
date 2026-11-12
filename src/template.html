@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="A reader on how recommendation and advertising algorithms evolved from 1992 to 2026: collaborative filtering, matrix factorization, large-scale CTR models, deep learning, auctions and autobidding, bias and privacy, and generative recommenders.">
+<title>Recommendation &amp; Ads Algorithms, 1992–2026</title>
+<style>{{KATEX_CSS}}</style>
+<style>{{READER_CSS}}</style>
+</head>
+<body>
+<a class="ar-skip" href="#ar-main">Skip to content</a>
+<div id="adtech-reader" data-chapters="{{CHAPTER_META}}">
+  <header class="ar-top">
+    <a class="ar-brand" href="#chapter-1"><span class="ar-brandmark" aria-hidden="true">ra</span><span>Recommendation &amp; Ads Algorithms<span class="ar-brandsub">An evolution reader, 1992–2026</span></span></a>
+    <div class="ar-topactions">
+      <span class="ar-edition">Edition 2026.11</span>
+      <button type="button" class="ar-iconbtn" id="ar-theme" aria-label="Toggle dark mode" title="Toggle dark mode"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg></button>
+      <button type="button" class="ar-iconbtn ar-menubtn" id="ar-menu" aria-label="Chapters" aria-expanded="false" aria-controls="ar-sidebar"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg></button>
+    </div>
+    <div class="ar-progress" id="ar-progress" aria-hidden="true"></div>
+  </header>
+
+  <section class="ar-hero" aria-label="Introduction">
+    <div class="ar-kicker">Recommendation · Advertising · Systems · Measurement</div>
+    <h1 class="ar-title">How the feed<br>learned to rank.</h1>
+    <p class="ar-subtitle">Thirty-four years of recommendation and advertising algorithms, from neighbourhood methods on Usenet to trillion-parameter generative recommenders: what each generation changed, the problem that forced the change, the mathematics, and what the next generation found wrong with it.</p>
+    <dl class="ar-stats">
+      <div><dt>Gist path</dt><dd>{{GIST_MIN}}<span>min</span></dd></div>
+      <div><dt>Full path</dt><dd>{{FULL_MIN}}<span>min</span></dd></div>
+      <div><dt>Chapters</dt><dd>{{CHAPTER_COUNT}}</dd></div>
+      <div><dt>Milestones</dt><dd>{{MILESTONES}}<span>dated</span></dd></div>
+    </dl>
+  </section>
+
+  <div class="ar-layout">
+    <aside class="ar-sidebar" id="ar-sidebar" aria-label="Contents">
+      <nav aria-label="Chapters">
+        <div class="ar-sidehead">Chapters</div>
+        <ol class="ar-chapterlist">
+{{CHAPTER_NAV}}
+        </ol>
+      </nav>
+      <nav class="ar-outline" aria-label="On this page">
+        <div class="ar-sidehead">On this page</div>
+        <ol id="ar-outline"></ol>
+      </nav>
+    </aside>
+
+    <main class="ar-main" id="ar-main" tabindex="-1">
+      <div class="ar-currentline"><span id="ar-current-label"></span><span id="ar-current-time"></span></div>
+{{CHAPTERS}}
+      <nav class="ar-pagination" aria-label="Chapter pagination">
+        <button class="ar-pagebtn" type="button" id="ar-prev"><span class="ar-pagedir">Previous</span><span class="ar-pagetitle" id="ar-prev-title"></span></button>
+        <span id="ar-page-index" aria-live="polite"></span>
+        <button class="ar-pagebtn ar-pagebtn-next" type="button" id="ar-next"><span class="ar-pagedir">Next</span><span class="ar-pagetitle" id="ar-next-title"></span></button>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="ar-footer">
+    <span>Dates and venues are checked against the primary papers and company posts listed in chapter 10. Numerical examples are synthetic unless attributed; company-reported gains are quoted as claims, not verified results.</span>
+    <span class="ar-footlinks"><a href="https://computational-advertising-reader.vercel.app" target="_blank" rel="noopener noreferrer">Companion: Computational Advertising reader ↗</a></span>
+  </footer>
+</div>
+<script>
+{{READER_JS}}
+</script>
+</body>
+</html>

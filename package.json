@@ -1,0 +1,12 @@
+{
+  "name": "recsys-ads-evolution-reader",
+  "private": true,
+  "description": "An interactive reader on how recommendation and advertising algorithms evolved, 1992–2026.",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node build.mjs --check && node tests/site.test.cjs && node tests/timeline.test.cjs"
+  },
+  "devDependencies": {
+    "katex": "^0.16.47"
+  }
+}

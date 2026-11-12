@@ -1,0 +1,69 @@
+<article class="ar-lesson" id="ar-chapter-0" data-nav="Start here" data-time="15 min" data-gist="15" data-full="15"><h1>Start here: six through-lines, five eras and how to read the evidence</h1>
+<aside class="ar-callout ar-key"><p class="ar-callout-title">In this chapter</p><ul>
+<li>Name the six quantities that every generation of recommendation and ads algorithms changed: signal, model, objective, serving architecture, pricing and measurement.</li>
+<li>Place any method from 1992 to 2026 in one of five eras and say which bottleneck it removed.</li>
+<li>Grade a claim by its evidence: peer-reviewed result, company engineering post, earnings-call statement or this reader's inference.</li>
+<li>Pick the gist path or the full path.</li>
+</ul></aside>
+<p class="ar-gist"><strong>The gist.</strong> Recommendation and advertising are one problem seen from two sides: choose, for one person at one moment, a few items out of millions, using feedback that the previous choices produced. Every generation of algorithms was forced by a bottleneck in the one before it: too little signal, too little model capacity, the wrong objective, too slow a serving path, a pricing rule that rewarded the wrong behaviour, or a measurement that could not tell correlation from cause. Read each era as an answer to the previous era's bottleneck, and each claim with its evidence grade attached.</p>
+
+<h2>One problem, two business models</h2>
+<p><strong>A recommender and an ad system solve the same allocation problem; they differ in who supplies the items and who pays for the slot.</strong> A recommender ranks items the platform owns or hosts (videos, products, posts) to maximize some long-run user value. An ad system ranks items that third parties pay to insert, so the ranking score multiplies a predicted response by a price the advertiser sets or the platform derives, and the platform must also run an auction, charge a price, pace a budget and prove that the ads caused sales. Since about 2016 the two have converged: the same deep ranking models, the same retrieval stack and, in 2024–2025, the same generative architectures serve both organic and paid slots at Meta, Google, ByteDance, Kuaishou and Alibaba.</p>
+<p>Throughout, an <em>impression</em> is one display of one item to one user; <em>CTR</em> (click-through rate) is clicks per impression; <em>CVR</em> (conversion rate) is conversions per click unless stated otherwise; <em>eCPM</em> is expected revenue per 1,000 impressions. The companion <a href="https://computational-advertising-reader.vercel.app">Computational Advertising reader</a> covers contracts, cash flow and auctions in depth; this reader follows how the algorithms changed over time.</p>
+
+<h2>Six through-lines</h2>
+<p><strong>Six quantities changed in every era; tracking them is the fastest way to understand why a method appeared when it did.</strong></p>
+<div class="ar-table-wrap"><table>
+<thead><tr><th>Through-line</th><th>1990s</th><th>2006–2013</th><th>2014–2020</th><th>2021–2026</th></tr></thead>
+<tbody>
+<tr><td data-label="Through-line"><strong>Signal</strong></td><td data-label="1990s">Explicit ratings from a few thousand users</td><td data-label="2006–2013">Ratings at scale (Netflix: 100M); implicit clicks and purchases; sparse categorical ad logs</td><td data-label="2014–2020">Behaviour sequences, dense embeddings, multimodal content</td><td data-label="2021–2026">Lifelong action streams of thousands to tens of thousands of events; privacy-limited cross-app signal</td></tr>
+<tr><td data-label="Through-line"><strong>Model</strong></td><td data-label="1990s">Neighbourhoods (user–user, item–item)</td><td data-label="2006–2013">Matrix factorization; logistic regression on billions of hashed features; factorization machines</td><td data-label="2014–2020">Embedding + MLP + explicit feature crosses; attention over behaviour; two-tower retrieval</td><td data-label="2021–2026">Transformer-style sequence models, generative retrieval over semantic IDs, foundation models distilled into serving models</td></tr>
+<tr><td data-label="Through-line"><strong>Objective</strong></td><td data-label="1990s">Predict a rating</td><td data-label="2006–2013">RMSE (Netflix), pairwise ranking (BPR), calibrated CTR (log loss)</td><td data-label="2014–2020">Multi-task: click, watch time, conversion, satisfaction</td><td data-label="2021–2026">Next-action generation; long-term value; advertiser value under constraints</td></tr>
+<tr><td data-label="Through-line"><strong>Serving</strong></td><td data-label="1990s">One scored list</td><td data-label="2006–2013">Precomputed item–item tables; online linear scoring</td><td data-label="2014–2020">Multi-stage cascade: retrieval → pre-rank → rank → re-rank, with approximate nearest-neighbour search</td><td data-label="2021–2026">Fewer, larger stages; some end-to-end generative pipelines</td></tr>
+<tr><td data-label="Through-line"><strong>Pricing (ads)</strong></td><td data-label="1990s">CPM banners; GoTo.com pay-per-click, pay-your-bid</td><td data-label="2006–2013">Quality-weighted second-price auctions (GSP); real-time bidding exchanges</td><td data-label="2014–2020">Optimized CPM/CPC (oCPM, oCPC); move to first-price in display</td><td data-label="2021–2026">Autobidding to target CPA/ROAS; campaign automation (Performance Max, Advantage+)</td></tr>
+<tr><td data-label="Through-line"><strong>Measurement</strong></td><td data-label="1990s">Offline accuracy on held-out ratings</td><td data-label="2006–2013">Online A/B tests; replay evaluation for bandits</td><td data-label="2014–2020">Debiasing (position, selection), off-policy correction; reproducibility audits</td><td data-label="2021–2026">Privacy-constrained attribution (ATT, SKAdNetwork); scaling-law curves; incrementality</td></tr>
+</tbody></table></div>
+<aside class="ar-callout ar-warn"><p class="ar-callout-title">Pitfall: hindsight ordering</p><p>The table reads like a clean sequence, but generations overlapped for years. Logistic regression ran production ad ranking at Google well after deep models were published, item–item tables still power “customers also bought” lists, and gradient-boosted trees still win many tabular tasks. A new method usually displaced the old one first in the stage where its bottleneck hurt most.</p></aside>
+
+<h2>Five eras, each answering the last one's bottleneck</h2>
+<p><strong>The eras are defined by the bottleneck their methods removed, not by calendar years; the dates are when the defining work appeared.</strong></p>
+<ol class="ar-timeline">
+<li><span class="ar-t">1992–2005</span><div><strong><a href="#chapter-3">Neighbourhoods and keyword auctions.</a></strong> Bottleneck removed: no way to personalize at all. Collaborative filtering uses other people's ratings; GoTo.com and Google AdWords sell clicks on keywords by auction.</div></li>
+<li><span class="ar-t">2006–2013</span><div><strong><a href="#chapter-4">Factorization and planet-scale linear models.</a></strong> Bottleneck removed: sparsity. Latent factors generalize across users and items that never co-occurred; hashed logistic regression trained online handles billions of ad features.</div></li>
+<li><span class="ar-t">2013–2020</span><div><strong><a href="#chapter-5">Deep learning and the multi-stage funnel.</a></strong> Bottleneck removed: hand-built feature crosses and a single scoring stage. Embeddings, learned interactions and two-tower retrieval scale to billions of items.</div></li>
+<li><span class="ar-t">2009–2025</span><div><strong><a href="#chapter-6">Exchanges, first-price auctions and autobidding</a></strong> (ads track) and <strong><a href="#chapter-7">bias, causality and privacy</a></strong> (cross-cutting). Bottlenecks removed: advertisers bidding by hand, and models trained on their own biased logs; then a new constraint imposed from outside: loss of cross-app identifiers.</div></li>
+<li><span class="ar-t">2021–2026</span><div><strong><a href="#chapter-8">Scaling and generative recommenders.</a></strong> Bottleneck removed: ranking models whose quality stopped improving with more compute. Sequence transducers and generative retrieval show compute-scaling curves similar to language models.</div></li>
+</ol>
+<p>The <a href="#chapter-2">interactive timeline</a> lists every dated milestone in one place, filterable by track and era.</p>
+
+<h2>Every claim carries an evidence grade</h2>
+<p><strong>Industrial recommender research mixes peer-reviewed results with marketing; this reader labels which is which.</strong> The four grades:</p>
+<div class="ar-table-wrap"><table>
+<thead><tr><th>Grade</th><th>What it means</th><th>How much to trust it</th></tr></thead>
+<tbody>
+<tr><td data-label="Grade"><span class="ar-ev ar-ev-paper">Paper</span></td><td data-label="What it means">Peer-reviewed or widely cited paper with the method described</td><td data-label="How much to trust it">The method is as described. Reported online gains are the authors' A/B tests on their own baselines and cannot be reproduced outside the company.</td></tr>
+<tr><td data-label="Grade"><span class="ar-ev ar-ev-post">Post</span></td><td data-label="What it means">Company engineering blog, product documentation, press release or contemporaneous news record</td><td data-label="How much to trust it">Dates and architecture outlines are usually accurate; performance numbers are selected and baselines unspecified.</td></tr>
+<tr><td data-label="Grade"><span class="ar-ev ar-ev-call">Call</span></td><td data-label="What it means">Earnings call, investor letter or press statement</td><td data-label="How much to trust it">Directionally informative about what management attributes revenue to; not evidence of mechanism.</td></tr>
+<tr><td data-label="Grade"><span class="ar-ev ar-ev-inf">Inference</span></td><td data-label="What it means">This reader's interpretation</td><td data-label="How much to trust it">Argued from the sources but not stated in them; flagged explicitly.</td></tr>
+</tbody></table></div>
+<p>A recurring lesson from <a href="#ar-repro">chapter 5</a>: several celebrated neural gains shrank or vanished once baselines were tuned properly. Treat an unreproduced online uplift as a hypothesis.</p>
+
+<h2>Two reading paths</h2>
+<p><strong>The gist path covers the whole arc in a little over two hours; the full path adds the mathematics and the exercises.</strong> On the gist path, read chapters 1–2 in full; for chapters 3–8 read the “In this chapter” box, the gist paragraph and the bold first sentence of each section, which states its claim; then do the gist set of exercises.</p>
+<div class="ar-table-wrap"><table>
+<thead><tr><th>Chapter</th><th>Gist path</th><th>Full path</th><th>Afterwards you can</th></tr></thead>
+<tbody>
+<tr><td data-label="Chapter">1 · <a href="#chapter-1">Start here</a></td><td data-label="Gist path">15 min</td><td data-label="Full path">15 min</td><td data-label="Afterwards you can">Place any method on the six through-lines.</td></tr>
+<tr><td data-label="Chapter">2 · <a href="#chapter-2">Interactive timeline</a></td><td data-label="Gist path">30 min</td><td data-label="Full path">30 min</td><td data-label="Afterwards you can">Find any milestone by track, era or keyword and follow it to its chapter.</td></tr>
+<tr><td data-label="Chapter">3 · <a href="#chapter-3">Neighbourhoods and keyword auctions</a></td><td data-label="Gist path">10 min</td><td data-label="Full path">35 min</td><td data-label="Afterwards you can">Explain why item–item beat user–user at Amazon and why GSP replaced pay-your-bid.</td></tr>
+<tr><td data-label="Chapter">4 · <a href="#chapter-4">Factorization and linear models</a></td><td data-label="Gist path">10 min</td><td data-label="Full path">50 min</td><td data-label="Afterwards you can">Derive the FM speed-up, the implicit-ALS trick and the FTRL update.</td></tr>
+<tr><td data-label="Chapter">5 · <a href="#chapter-5">Deep learning and the funnel</a></td><td data-label="Gist path">10 min</td><td data-label="Full path">60 min</td><td data-label="Afterwards you can">Explain two-tower retrieval with logQ correction, DIN attention and ESMM.</td></tr>
+<tr><td data-label="Chapter">6 · <a href="#chapter-6">Auctions and autobidding</a></td><td data-label="Gist path">10 min</td><td data-label="Full path">45 min</td><td data-label="Afterwards you can">Derive bid shading in first price and the budget-paced bid <x-tex>v/(1+\mu)</x-tex>.</td></tr>
+<tr><td data-label="Chapter">7 · <a href="#chapter-7">Bias, causality and privacy</a></td><td data-label="Gist path">10 min</td><td data-label="Full path">45 min</td><td data-label="Afterwards you can">Correct position bias with inverse propensity weights; explain what ATT removed.</td></tr>
+<tr><td data-label="Chapter">8 · <a href="#chapter-8">Scaling and generative recommenders</a></td><td data-label="Gist path">10 min</td><td data-label="Full path">50 min</td><td data-label="Afterwards you can">Explain semantic IDs, HSTU and what is and is not public about 2025 ad models.</td></tr>
+<tr><td data-label="Chapter">9 · <a href="#chapter-9">Exercises</a></td><td data-label="Gist path">30 min (gist set)</td><td data-label="Full path">60 min (both sets)</td><td data-label="Afterwards you can">Check yourself on fourteen worked problems.</td></tr>
+<tr><td data-label="Chapter">10 · <a href="#chapter-10">Sources and review</a></td><td data-label="Gist path">as needed</td><td data-label="Full path">as needed</td><td data-label="Afterwards you can">Look up a paper, a term, an erratum or a verification note.</td></tr>
+<tr><td data-label="Chapter"><strong>Total</strong></td><td data-label="Gist path"><strong>135 min</strong></td><td data-label="Full path"><strong>390 min</strong></td><td data-label="Afterwards you can">—</td></tr>
+</tbody></table></div>
+<p>Gist: 15 + 30 + 6 × 10 + 30 = 135 minutes. Full: 15 + 30 + 35 + 50 + 60 + 45 + 45 + 50 + 60 = 390 minutes.</p>
+</article>

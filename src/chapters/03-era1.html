@@ -1,0 +1,89 @@
+<article class="ar-lesson" id="ar-chapter-2" data-nav="Neighbourhoods &amp; auctions" data-time="35 min" data-gist="10" data-full="35"><h1>Era I (1992–2005): neighbourhoods and keyword auctions</h1>
+<aside class="ar-callout ar-key"><p class="ar-callout-title">In this chapter</p><ul>
+<li>Write the GroupLens user–user prediction and say why it does not scale.</li>
+<li>Explain the complexity argument that made item–item filtering Amazon's production choice.</li>
+<li>Explain why GoTo.com's pay-your-bid auction produced bidding cycles, and how Google's 2002 quality-weighted second-price rule changed both the ranking and the incentives.</li>
+<li>Compute GSP and VCG payments for a two-slot auction and state the Edelman–Ostrovsky–Schwarz equivalence.</li>
+</ul></aside>
+<p class="ar-gist"><strong>The gist.</strong> The first recommenders replaced editors with neighbours: people who rated things like you did predict what you will like. That worked for a few thousand Usenet readers but not for tens of millions of shoppers, so Amazon flipped the neighbourhood from users to items and precomputed it offline. Advertising went through the same shift from manual to computed. GoTo.com auctioned search positions to the highest bidder, which produced unstable bidding wars and showed ads nobody clicked. Google ranked by bid times predicted click rate and charged each winner the minimum needed to keep its position. That one rule made click prediction the core of search advertising.</p>
+
+<h2>Collaborative filtering: other people's ratings as the signal</h2>
+<p><strong>Collaborative filtering predicts a user's interest from the recorded interest of similar users, with no model of the item's content.</strong> Xerox PARC's <em>Tapestry</em> (Goldberg, Nichols, Oki and Terry, 1992) coined the term: users annotated e-mail and Usenet messages, and others filtered by those annotations with explicit queries such as “messages Joe liked”. Filtering was collaborative but manual: you had to know whose judgement to trust.</p>
+<p><strong>GroupLens (Resnick et al., 1994) automated the choice of whom to trust.</strong> Each Usenet reader rated articles 1–5; a server predicted unseen ratings as the user's mean plus a correlation-weighted average of other users' deviations from their own means:</p>
+<div class="ar-math"><x-tex display>\hat r_{u,i}=\bar r_u+\frac{\sum_{v\in N(u)} w_{uv}\,(r_{v,i}-\bar r_v)}{\sum_{v\in N(u)} |w_{uv}|},\qquad w_{uv}=\operatorname{corr}(r_{u,\cdot},\,r_{v,\cdot})\text{ over co-rated items}.</x-tex></div>
+<p>Here <x-tex>r_{v,i}</x-tex> is user <x-tex>v</x-tex>'s rating of item <x-tex>i</x-tex>, <x-tex>\bar r_v</x-tex> that user's mean rating and <x-tex>N(u)</x-tex> the neighbours who rated <x-tex>i</x-tex>. Mean-centring removes the fact that some people rate everything a 4. MIT's <em>Ringo</em> (Shardanand and Maes, 1995) applied the same idea to music and compared similarity measures, an early example of the field's habit of tuning the similarity function.</p>
+<p><strong>The user–user method has two structural problems.</strong> First, cost: predicting for one user scans all other users, and with <x-tex>M</x-tex> users and <x-tex>N</x-tex> items the naive cost per prediction is <x-tex>O(MN)</x-tex>. Second, sparsity: two shoppers in a catalogue of millions rarely share enough purchases for a correlation to mean anything, so neighbourhoods are noisy exactly where most users are.</p>
+
+<h2>Item–item filtering: move the neighbourhood offline</h2>
+<p><strong>Amazon's item-to-item filtering made recommendation cheap at serving time by precomputing a similar-items table offline.</strong> Sarwar, Karypis, Konstan and Riedl (WWW 2001) evaluated item-based neighbourhoods academically; Linden, Smith and York (IEEE Internet Computing, 2003) described the production system at Amazon. Represent each item by its vector of customers (1 if bought). Similarity is the cosine between item vectors:</p>
+<div class="ar-math"><x-tex display>\operatorname{sim}(X,Y)=\frac{\mathbf x\cdot\mathbf y}{\lVert\mathbf x\rVert\,\lVert\mathbf y\rVert}.</x-tex></div>
+<section class="ar-worked">
+<header class="ar-worked-head"><span class="ar-worked-tag">Worked example</span><h4>Three items, four customers</h4></header>
+<div class="ar-worked-body">
+<p>Given: purchase vectors over customers 1–4: <x-tex>\mathbf x=(1,1,0,1)</x-tex>, <x-tex>\mathbf y=(1,1,0,0)</x-tex>, <x-tex>\mathbf z=(0,0,1,1)</x-tex>.</p>
+<ol class="ar-steps">
+<li><x-tex>\operatorname{sim}(X,Y)=\dfrac{2}{\sqrt3\,\sqrt2}=\dfrac{2}{2.449}=0.816.</x-tex></li>
+<li><x-tex>\operatorname{sim}(X,Z)=\dfrac{1}{\sqrt3\,\sqrt2}=0.408.</x-tex></li>
+<li><x-tex>\operatorname{sim}(Y,Z)=0</x-tex>: no shared customers.</li>
+</ol>
+<p class="ar-result">Result: <strong>a customer who just bought Y is shown X first, then nothing from Z.</strong> The table row for Y is <x-tex>[X:0.816,\ Z:0]</x-tex>, computed once offline.</p>
+<p class="ar-check">Check: cosine is 1 only for identical vectors; X and Y differ only in customer 4, so a high but not perfect score is right.</p>
+</div>
+</section>
+<p><strong>The complexity argument is what made the choice.</strong> Linden et al. note that building the table is <x-tex>O(N^2M)</x-tex> in the worst case but close to <x-tex>O(NM)</x-tex> in practice, because most customers buy few items. At serving time, the cost depends only on how many items <em>this</em> user has bought, not on the size of the catalogue or the customer base. Item similarities also change slowly (a book's co-purchasers are stable), so the table can be refreshed in batch, whereas a user's neighbourhood shifts with every purchase.</p>
+<aside class="ar-callout ar-note"><p class="ar-callout-title">What survived</p><p>Precompute what is stable, compute at request time only what depends on the request: this split became the retrieval/ranking split of <a href="#chapter-5">chapter 5</a>. YouTube's 2010 system (Davidson et al., RecSys 2010) was still item–item at heart, using co-visitation counts within a session normalized by item popularity, then ranking the candidates.</p></aside>
+<p><strong>Content-based filtering was the alternative, and its weakness is the mirror image of collaborative filtering's.</strong> Representing items by their attributes (keywords with TF-IDF weights, genre tags, Pandora's hand-labelled Music Genome Project from 2000) handles new items with no interactions, the <em>cold-start</em> problem. But it recommends more of what you already consumed and cannot discover that people who like jazz also tend to buy a certain cookbook. Hybrids that combine both are the norm from this point on.</p>
+
+<h2>Advertising before auctions: the CPM banner</h2>
+<p><strong>The first web ads were sold like magazine space, priced per thousand impressions and targeted by site section.</strong> HotWired ran the first widely cited clickable banner in October 1994 (for AT&amp;T). Ad servers such as DoubleClick (founded 1996) delivered and counted impressions; targeting was by site, section and coarse user attributes, and the price was negotiated. There was no per-impression prediction because the advertiser, not the platform, bore the risk that nobody clicked.</p>
+
+<h2>GoTo.com: pay-per-click, pay-your-bid, and the bidding cycle</h2>
+<p><strong>GoTo.com (1998) sold search-result positions by auction, charging per click and ranking purely by bid, and the auction had no stable equilibrium.</strong> Advertisers bid on keywords; the highest bidder took position 1 and paid its own bid per click (a <em>generalized first-price</em> auction). Two problems followed.</p>
+<ul>
+<li><strong>Bidding cycles.</strong> With bids changeable at any time, each bidder wants to bid one cent above the next bidder below it, not its full value. Two rivals ratchet each other upward until one reaches its value; that one drops to the minimum bid; the leader then drops to one cent above it, and the climb restarts. Edelman and Ostrovsky (2007) documented these sawtooth patterns in Overture's bid logs. Revenue and allocation both suffered from the churn.</li>
+<li><strong>Ranking ignores clicks.</strong> Under pay-per-click the platform earns only when users click. Ranking a $2 ad with a 1% click rate above a $1 ad with a 3% click rate loses money for the platform and shows users a less relevant ad.</li>
+</ul>
+<p>GoTo became Overture in 2001 and was bought by Yahoo in 2003; Overture had moved to second-price (GSP) billing in mid-2002 (<a href="#ar-src-era1">sources</a>).</p>
+
+<h2 id="ar-gsp">Google's 2002 rule: rank by bid × CTR, pay the next bidder's price</h2>
+<p><strong>Google's AdWords Select (2002) ranked ads by expected revenue per impression and charged each winner the smallest bid that would keep its position; the price became a function of predicted click rates.</strong> Let advertiser <x-tex>k</x-tex> bid <x-tex>b_k</x-tex> per click and have predicted click rate <x-tex>c_k</x-tex>. Sort by <x-tex>b_k c_k</x-tex> (the eCPM divided by 1,000). The ad in position <x-tex>i</x-tex> pays, per click,</p>
+<div class="ar-math"><x-tex display>p_i=\frac{b_{i+1}\,c_{i+1}}{c_i},</x-tex></div>
+<p>the bid at which its score would tie the next ad's. This is the <em>generalized second-price</em> (GSP) auction with quality weighting. From August 2005 Google folded more than click rate into a <em>Quality Score</em> that also set each keyword's minimum bid.</p>
+<section class="ar-worked">
+<header class="ar-worked-head"><span class="ar-worked-tag">Worked example</span><h4>One slot, quality-weighted</h4></header>
+<div class="ar-worked-body">
+<p>Given: ad A bids $2.00 per click with <x-tex>c_A=0.01</x-tex>; ad B bids $1.00 with <x-tex>c_B=0.03</x-tex>.</p>
+<ol class="ar-steps">
+<li>Scores: <x-tex>b_Ac_A=\$0.020</x-tex>, <x-tex>b_Bc_B=\$0.030</x-tex> per impression. B wins despite the lower bid.</li>
+<li>B's price per click: <x-tex>p_B=\dfrac{2.00\times0.01}{0.03}=\$0.667.</x-tex></li>
+<li>Expected revenue per impression: <x-tex>c_B\,p_B=0.03\times\$0.667=\$0.020.</x-tex></li>
+</ol>
+<p class="ar-result">Result: <strong>B pays $0.67 per click, and the platform's expected revenue per impression equals A's score, $0.020.</strong></p>
+<p class="ar-check">Check: in expectation the winner pays the runner-up's expected revenue per impression, exactly the second-price logic applied in score space. Ranking by bid alone would have shown A for an expected $0.020 per impression and a third of the clicks.</p>
+</div>
+</section>
+<aside class="ar-callout ar-warn"><p class="ar-callout-title">Why this made CTR prediction the core business</p><p>The predicted click rate <x-tex>c_k</x-tex> now enters both the ranking and the price. An over-estimate for one ad promotes it and also lowers the price it pays (<x-tex>c_i</x-tex> is in the denominator). Every later generation of CTR models in <a href="#chapter-4">chapter 4</a> and <a href="#chapter-5">chapter 5</a> is judged first by <em>calibration</em>, not only ranking accuracy, for this reason.</p></aside>
+
+<h2>GSP is not truthful, yet often lands on the VCG outcome</h2>
+<p><strong>Bidding your true value is not an equilibrium strategy in GSP, but a natural class of GSP equilibria yields exactly the VCG payments.</strong> In a position auction, slot <x-tex>j</x-tex> gets <x-tex>\alpha_j</x-tex> clicks per impression (position effect), the same for every ad (set quality equal to keep the example clean). The Vickrey–Clarke–Groves (VCG) mechanism charges each winner the value the others lose because of its presence; truthful bidding is dominant.</p>
+<section class="ar-worked">
+<header class="ar-worked-head"><span class="ar-worked-tag">Worked example</span><h4>Two slots, three bidders</h4></header>
+<div class="ar-worked-body">
+<p>Given: slot click rates <x-tex>\alpha_1=0.10</x-tex>, <x-tex>\alpha_2=0.05</x-tex>; values per click <x-tex>v=(\$10,\$6,\$2)</x-tex>.</p>
+<ol class="ar-steps">
+<li>GSP with truthful bids: slot 1 pays $6 per click, slot 2 pays $2. Revenue per impression <x-tex>0.10\times6+0.05\times2=\$0.70.</x-tex></li>
+<li>VCG, bidder 2: without it, bidder 3 would take slot 2 and earn <x-tex>0.05\times2=\$0.10</x-tex>; bidder 2's charge is $0.10 per impression, i.e. $2 per click.</li>
+<li>VCG, bidder 1: without it, bidders 2 and 3 get <x-tex>0.10\times6+0.05\times2=\$0.70</x-tex>; with it they get <x-tex>0.05\times6=\$0.30</x-tex>. Charge $0.40 per impression, i.e. $4 per click.</li>
+<li>VCG revenue: <x-tex>\$0.40+\$0.10=\$0.50</x-tex> per impression.</li>
+<li>Is truthful GSP an equilibrium? Bidder 1 pays $6 in slot 1, utility <x-tex>0.10\times(10-6)=\$0.40</x-tex>. By bidding between $2 and $6 it drops to slot 2, pays $2, utility <x-tex>0.05\times(10-2)=\$0.40</x-tex>: indifferent here, and with slightly different numbers strictly better. Truth-telling is not dominant.</li>
+<li>Equilibrium with VCG prices: bidder 2 bids $4 instead of $6, bidder 3 bids $2. Bidder 1 pays $4 (utility $0.60, versus $0.40 in slot 2), bidder 2 pays $2 (utility $0.20) and does not envy bidder 1's slot at bidder 1's price, since <x-tex>0.10\times(6-4)=\$0.20</x-tex> as well. Bidder 3 could take slot 2 only by bidding above $4, and would then pay $4 per click, above its $2 value. No one gains by deviating.</li>
+</ol>
+<p class="ar-result">Result: <strong>truthful GSP would raise $0.70 per impression; VCG raises $0.50; the equilibrium in step 6 is a GSP outcome with exactly the VCG payments.</strong></p>
+<p class="ar-check">Check: the VCG price of slot 1 ($4 per click) is the price at which bidder 2 is indifferent between slot 1 at $4 and slot 2 at $2: <x-tex>0.10(6-4)=0.05(6-2)=0.20</x-tex>.</p>
+</div>
+</section>
+<p>Edelman, Ostrovsky and Schwarz (2007) and Varian (2007) formalized this independently: GSP has a family of “locally envy-free” (Varian: symmetric Nash) equilibria, and the one with the lowest revenue gives each advertiser the same position and payment as VCG. This is a named result, not proved here. In practice GSP survived in search for two decades because it was simple to explain (“pay just enough to beat the next ad”) and, at equilibrium, no worse for revenue than VCG. Google moved its contextual (AdSense) ads to a version of VCG in late 2012 while search stayed on GSP, and Facebook's ad auction is a VCG auction (Varian and Harris, 2014).</p>
+
+<h2>What broke next</h2>
+<p><strong>Both halves of Era I hit the same wall: they needed a dense signal that did not exist.</strong> Neighbourhood methods need overlapping histories; most users and items have almost none. Quality-weighted auctions need a predicted click rate for every ad, query and user, including ads with no history. Both pushed the field toward models that generalize across sparse observations: latent factors for ratings and large-scale regression for clicks, the subject of <a href="#chapter-4">Era II</a>.</p>
+</article>
