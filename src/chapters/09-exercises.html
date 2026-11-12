@@ -3,6 +3,7 @@
 <li>Gist set (six problems, 30 minutes): the conceptual core of each era, with light arithmetic.</li>
 <li>Depth set (eight problems, 30 minutes): the derivations from chapters 4–7, with numbers you can check by hand.</li>
 <li>Try each before opening the answer; every answer ends with a check.</li>
+<li>Terms are defined at first use here and collected in the <a href="#glossary">glossary</a>.</li>
 </ul></aside>
 <p class="ar-gist"><strong>The gist.</strong> If you can price a quality-weighted auction, de-bias a click log, explain why an autobidder may bid above value and grade a claim by its evidence, you have the gist path. The depth set tests whether you can redo the key derivations: the implicit-ALS saving, the watch-time odds, the logQ correction, budget multipliers, bid shading, delayed feedback and ESMM.</p>
 
@@ -10,14 +11,14 @@
 
 <details class="ar-exercise"><summary>G1 · Price a quality-weighted auction (chapter 3)</summary><div class="ar-answer">
 <p><strong>Problem.</strong> One slot. Ad A bids $3.00 per click with predicted CTR 0.02; ad B bids $1.50 with CTR 0.05; ad C bids $2.00 with CTR 0.01. Who wins under Google's 2002 rule, what is the price per click, and what is the expected revenue per impression?</p>
-<p><strong>Answer.</strong> Scores <x-tex>b\cdot c</x-tex>: A <x-tex>=\$0.060</x-tex>, B <x-tex>=\$0.075</x-tex>, C <x-tex>=\$0.020</x-tex>. B wins. Price <x-tex>p_B=b_Ac_A/c_B=0.060/0.05=\$1.20</x-tex> per click. Expected revenue per impression <x-tex>0.05\times\$1.20=\$0.060</x-tex>.</p>
+<p><strong>Answer.</strong> Scores <x-tex>b\cdot c</x-tex> (bid per click times predicted click-through rate, the expected revenue per impression): A <x-tex>=\$0.060</x-tex>, B <x-tex>=\$0.075</x-tex>, C <x-tex>=\$0.020</x-tex>. B wins. Price <x-tex>p_B=b_Ac_A/c_B=0.060/0.05=\$1.20</x-tex> per click. Expected revenue per impression <x-tex>0.05\times\$1.20=\$0.060</x-tex>.</p>
 <p class="ar-check">Check: expected revenue equals the runner-up's score, as in chapter 3. Under GoTo's pay-your-bid rule ranked by bid, A would win and pay $3.00 per click, for expected revenue <x-tex>0.02\times3=\$0.060</x-tex>: the same here, but with 40% of B's clicks and an unstable bidding game.</p>
 </div></details>
 
 <details class="ar-exercise"><summary>G2 · Why item–item at Amazon (chapter 3)</summary><div class="ar-answer">
 <p><strong>Problem.</strong> Give two reasons Amazon chose item-to-item filtering over user–user filtering.</p>
 <p><strong>Answer.</strong> (1) Serving cost: with a precomputed similar-items table, the online cost depends only on the number of items the current user has bought, not on the number of customers or items. (2) Stability: item–item similarities change slowly and can be recomputed in batch, whereas a user's neighbourhood changes with every purchase and is noisy for users with few purchases.</p>
-<p class="ar-check">Check: the offline table costs <x-tex>O(N^2M)</x-tex> in the worst case, close to <x-tex>O(NM)</x-tex> in practice. The expensive work is moved offline, not removed.</p>
+<p class="ar-check">Check: with <x-tex>N</x-tex> items and <x-tex>M</x-tex> customers, the offline table costs <x-tex>O(N^2M)</x-tex> in the worst case, close to <x-tex>O(NM)</x-tex> in practice. The expensive work is moved offline, not removed.</p>
 </div></details>
 
 <details class="ar-exercise"><summary>G3 · What the Netflix Prize taught (chapter 4)</summary><div class="ar-answer">
@@ -27,13 +28,13 @@
 </div></details>
 
 <details class="ar-exercise"><summary>G4 · De-bias a click log (chapter 7)</summary><div class="ar-answer">
-<p><strong>Problem.</strong> Examination probabilities are <x-tex>\theta_1=1.0</x-tex> and <x-tex>\theta_2=0.6</x-tex>. Item D was shown 1,000 times at position 1 and clicked 70 times; item C was shown 1,000 times at position 2 and clicked 45 times. Which item is more relevant?</p>
+<p><strong>Problem.</strong> Examination probabilities, the chance a user looks at each position at all (<a href="#chapter-7">chapter 7</a>), are <x-tex>\theta_1=1.0</x-tex> and <x-tex>\theta_2=0.6</x-tex>. Item D was shown 1,000 times at position 1 and clicked 70 times; item C was shown 1,000 times at position 2 and clicked 45 times. Which item is more relevant?</p>
 <p><strong>Answer.</strong> Naive CTR: D 0.070, C 0.045. IPS-corrected relevance: D <x-tex>=70/1.0/1{,}000=0.070</x-tex>; C <x-tex>=45/0.6/1{,}000=0.075</x-tex>. C is more relevant and should be tried at position 1.</p>
 <p class="ar-check">Check: if C were at position 1 its expected clicks would be <x-tex>1{,}000\times1.0\times0.075=75&gt;70</x-tex>.</p>
 </div></details>
 
 <details class="ar-exercise"><summary>G5 · An autobidder bids above value (chapter 6)</summary><div class="ar-answer">
-<p><strong>Problem.</strong> Target CPA $50, pCTR 0.02, pCVR 0.05 (per click). Compute the value per 1,000 impressions. The campaign's budget is not binding and its learned multiplier is <x-tex>\kappa=1.2</x-tex>. What does it bid in a second-price auction, and why can that be consistent with the advertiser's target?</p>
+<p><strong>Problem.</strong> Target CPA $50, pCTR 0.02, pCVR 0.05 (per click). Compute the value per 1,000 impressions. The campaign's budget is not binding and its learned bid multiplier is <x-tex>\kappa=1.2</x-tex> (the <x-tex>\kappa=(1+\lambda)/(\lambda+\mu)</x-tex> of <a href="#chapter-6">chapter 6</a>, with <x-tex>\lambda</x-tex> the target constraint's multiplier and <x-tex>\mu</x-tex> the budget's). What does it bid in a second-price auction, and why can that be consistent with the advertiser's target?</p>
 <p><strong>Answer.</strong> Value per impression <x-tex>0.02\times0.05\times\$50=\$0.05</x-tex>, i.e. $50 per 1,000. Bid <x-tex>1.2\times\$50=\$60</x-tex> CPM. The target constrains the <em>average</em> cost per conversion. In a second-price auction many impressions clear well below the bid, and the slack they create pays for impressions won above value, so the campaign buys more conversions while still averaging $50 per conversion.</p>
 <p class="ar-check">Check: with <x-tex>\mu=0</x-tex>, <x-tex>\kappa=(1+\lambda)/\lambda=1.2</x-tex> gives <x-tex>\lambda=5</x-tex>; any <x-tex>\lambda&gt;0</x-tex> gives <x-tex>\kappa&gt;1</x-tex>.</p>
 </div></details>
@@ -47,9 +48,9 @@
 <h2 id="ar-exercises-depth">Depth set</h2>
 
 <details class="ar-exercise"><summary>D1 · How much the implicit-ALS trick saves (chapter 4)</summary><div class="ar-answer">
-<p><strong>Problem.</strong> <x-tex>N=10^6</x-tex> items, <x-tex>k=64</x-tex> factors, and a user with <x-tex>n_u=50</x-tex> interactions. Compare the cost of forming <x-tex>Y^{\top}C^uY</x-tex> naively with the trick (counting multiply-adds, plus <x-tex>k^3</x-tex> for the solve in both cases).</p>
-<p><strong>Answer.</strong> Naive: <x-tex>k^2N=4{,}096\times10^6\approx4.1\times10^9</x-tex>. Trick: <x-tex>k^2n_u+k^3=4{,}096\times50+262{,}144=204{,}800+262{,}144=466{,}944</x-tex>, with <x-tex>Y^{\top}Y</x-tex> computed once per sweep for all users. Ratio about <x-tex>8{,}800\times</x-tex>.</p>
-<p class="ar-check">Check: the shared <x-tex>Y^{\top}Y</x-tex> costs the same <x-tex>4.1\times10^9</x-tex> once, amortized over millions of users.</p>
+<p><strong>Problem.</strong> <x-tex>N=10^6</x-tex> items, <x-tex>k=64</x-tex> factors, and a user with <x-tex>|\mathcal K_u|=50</x-tex> interactions. In the notation of chapter 4, compare the cost of forming <x-tex>Q^{\top}C^uQ</x-tex> naively with the trick (counting multiply-adds, plus <x-tex>k^3</x-tex> for the solve in both cases).</p>
+<p><strong>Answer.</strong> Naive: <x-tex>k^2N+k^3=4{,}096\times10^6+262{,}144\approx4.1\times10^9</x-tex>. Trick: <x-tex>k^2|\mathcal K_u|+k^3=4{,}096\times50+262{,}144=204{,}800+262{,}144=466{,}944</x-tex>, with <x-tex>Q^{\top}Q</x-tex> computed once per sweep for all users. Ratio about <x-tex>8{,}800\times</x-tex>.</p>
+<p class="ar-check">Check: the shared <x-tex>Q^{\top}Q</x-tex> costs the same <x-tex>4.1\times10^9</x-tex> once, amortized over millions of users.</p>
 </div></details>
 
 <details class="ar-exercise"><summary>D2 · Watch-time odds (chapter 5)</summary><div class="ar-answer">
@@ -72,25 +73,25 @@
 
 <details class="ar-exercise"><summary>D5 · Shade a first-price bid (chapter 6)</summary><div class="ar-answer">
 <p><strong>Problem.</strong> Value <x-tex>v=\$5</x-tex> CPM. (a) Highest competing bid <x-tex>Z\sim\text{Uniform}(0,\$8)</x-tex>: optimal bid, win probability and expected surplus per 1,000 auctions, and compare with second price. (b) If <x-tex>Z</x-tex> is the maximum of two independent Uniform(0, $8) bids, <x-tex>F(b)=(b/8)^2</x-tex>: optimal bid?</p>
-<p><strong>Answer.</strong> (a) <x-tex>b^*=v/2=\$2.50</x-tex>; <x-tex>F=2.5/8=0.3125</x-tex>; surplus <x-tex>(5-2.5)\times0.3125=\$0.78</x-tex>. Second price, bid $5: <x-tex>v^2/(2L)=25/16=\$1.56</x-tex>. (b) <x-tex>F/f=(b^2/64)/(2b/64)=b/2</x-tex>, so <x-tex>5-b=b/2</x-tex>, <x-tex>b^*=2v/3=\$3.33</x-tex>.</p>
+<p><strong>Answer.</strong> (a) <x-tex>b^*=v/2=\$2.50</x-tex>; <x-tex>F=2.5/8=0.3125</x-tex>; surplus <x-tex>(5-2.5)\times0.3125=\$0.78</x-tex>. Second price, bid $5: <x-tex>v^2/(2L)</x-tex> with <x-tex>L=\$8</x-tex> gives <x-tex>25/16=\$1.56</x-tex>. (b) <x-tex>F/f=(b^2/64)/(2b/64)=b/2</x-tex>, so <x-tex>5-b=b/2</x-tex>, <x-tex>b^*=2v/3=\$3.33</x-tex>.</p>
 <p class="ar-check">Check: more competition shades less (2/3 of value instead of 1/2). With <x-tex>n</x-tex> uniform competitors, <x-tex>b^*=nv/(n+1)</x-tex>, approaching truthful bidding.</p>
 </div></details>
 
 <details class="ar-exercise"><summary>D6 · A click that has not converted yet (chapter 7)</summary><div class="ar-answer">
-<p><strong>Problem.</strong> Eventual conversion probability <x-tex>p=0.04</x-tex>; delay exponential with rate <x-tex>\lambda=0.5</x-tex> per day (mean 2 days). A click has waited <x-tex>e=1</x-tex> day without converting. What is the likelihood of that observation, and the probability it will still convert?</p>
-<p><strong>Answer.</strong> <x-tex>e^{-0.5}=0.6065</x-tex>. Likelihood <x-tex>1-p+pe^{-\lambda e}=0.96+0.04\times0.6065=0.9843</x-tex>. Probability of eventual conversion given none yet: <x-tex>pe^{-\lambda e}/0.9843=0.02426/0.9843=0.0246</x-tex>.</p>
+<p><strong>Problem.</strong> Eventual conversion probability <x-tex>p=0.04</x-tex>; delay exponential with rate <x-tex>h=0.5</x-tex> per day (mean 2 days). A click has waited <x-tex>\tau=1</x-tex> day without converting. What is the likelihood of that observation, and the probability it will still convert?</p>
+<p><strong>Answer.</strong> <x-tex>e^{-0.5}=0.6065</x-tex>. Likelihood <x-tex>1-p+pe^{-h\tau}=0.96+0.04\times0.6065=0.9843</x-tex>. Probability of eventual conversion given none yet: <x-tex>pe^{-h\tau}/0.9843=0.02426/0.9843=0.0246</x-tex>.</p>
 <p class="ar-check">Check: the click still carries 62% of its prior conversion probability (0.0246/0.04). Labelling it negative would throw that away.</p>
 </div></details>
 
 <details class="ar-exercise"><summary>D7 · ESMM by hand (chapter 5)</summary><div class="ar-answer">
 <p><strong>Problem.</strong> For an impression, pCTR = 0.02 and pCTCVR = 0.001. What is pCVR? Why is a CVR model trained only on clicked impressions biased when used to score all impressions?</p>
-<p><strong>Answer.</strong> <x-tex>\text{pCVR}=0.001/0.02=0.05</x-tex>. Clicked impressions are a selected sample: users who click differ systematically from those who do not, so a model fitted on them learns <x-tex>P(\text{conv}\mid\text{click},x)</x-tex> only where clicks are common and extrapolates elsewhere. ESMM trains pCTR and pCTCVR on all impressions, and pCVR only through their ratio.</p>
+<p><strong>Answer.</strong> <x-tex>\text{pCVR}=0.001/0.02=0.05</x-tex>. Clicked impressions are a selected sample: users who click differ systematically from those who do not, so a model fitted on them learns <x-tex>P(\text{conv}\mid\text{click},x)</x-tex> only where clicks are common and extrapolates elsewhere. ESMM trains pCTR and pCTCVR on all impressions, and pCVR only through their ratio, which reduces (though, as chapter 5 notes, does not fully remove) the bias.</p>
 <p class="ar-check">Check: <x-tex>0.02\times0.05=0.001</x-tex>; with 1,000,000 impressions that is 20,000 clicks and 1,000 conversions.</p>
 </div></details>
 
 <details class="ar-exercise"><summary>D8 · Pre-mortem a generative-ads claim (chapters 7–8)</summary><div class="ar-answer">
-<p><strong>Problem.</strong> A platform reports that a new foundation ranking model raised ad conversions by 5%. Twelve months later, advertisers' own holdout tests show no change in incremental sales. Give three mechanisms that would reconcile both facts.</p>
+<p><strong>Problem.</strong> A platform reports that a new foundation ranking model raised ad conversions by 5%. Twelve months later, advertisers' own holdout tests (randomized groups not shown the ads, <a href="#chapter-7">chapter 7</a>) show no change in incremental sales. Give three mechanisms that would reconcile both facts.</p>
 <p><strong>Answer.</strong> (1) <em>Attribution, not incrementality</em>: the model got better at reaching people who would have converted anyway, raising attributed conversions without causing more. (2) <em>Measurement by the optimizer</em>: reported conversions include modelled conversions from the same platform, so the metric partly moves with the model. (3) <em>Mix and novelty</em>: the A/B test ran on a favourable slice or a short window; gains decayed as advertisers' bids, budgets and competitors adapted (the auction is an equilibrium, not a fixed environment).</p>
-<p class="ar-check">Check: each mechanism predicts something testable: (1) attributed and incremental conversions diverge in a ghost-ad holdout; (2) observed-only conversions rise less than reported ones; (3) the lift shrinks with test duration.</p>
+<p class="ar-check">Check: each mechanism predicts something testable: (1) attributed and incremental conversions diverge in a ghost-ad holdout (one that logs which ads the control group would have seen); (2) observed-only conversions rise less than reported ones; (3) the lift shrinks with test duration.</p>
 </div></details>
 </article>

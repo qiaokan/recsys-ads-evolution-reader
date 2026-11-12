@@ -87,35 +87,166 @@
 </ul>
 
 <h2 id="glossary">Glossary</h2>
+<p>Every abbreviation and ad-tech or recommender-systems term used in the reader, alphabetically. Chapters also spell each one out at first use.</p>
 <div class="ar-table-wrap"><table>
 <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
 <tbody>
+<tr><td data-label="Term">A/B test</td><td data-label="Meaning">Randomized online experiment: users split between the current system (A) and a candidate (B).</td></tr>
+<tr><td data-label="Term">Ad load</td><td data-label="Meaning">The share of slots or screen space given to ads rather than organic content.</td></tr>
+<tr><td data-label="Term">Ad server</td><td data-label="Meaning">The system that finally decides which ad fills a publisher's slot.</td></tr>
+<tr><td data-label="Term">AdX</td><td data-label="Meaning">DoubleClick Ad Exchange, Google's real-time ad exchange after it acquired DoubleClick in 2008.</td></tr>
 <tr><td data-label="Term">ALS</td><td data-label="Meaning">Alternating least squares: fix one factor matrix, solve the other in closed form, repeat.</td></tr>
-<tr><td data-label="Term">ANN</td><td data-label="Meaning">Approximate nearest-neighbour search (HNSW, product quantization, ScaNN).</td></tr>
+<tr><td data-label="Term">ANN</td><td data-label="Meaning">Approximate nearest-neighbour search over vectors (HNSW, product quantization, ScaNN).</td></tr>
 <tr><td data-label="Term">ATT</td><td data-label="Meaning">App Tracking Transparency: Apple's opt-in requirement for cross-app tracking, enforced from iOS 14.5 (April 2021).</td></tr>
+<tr><td data-label="Term">Attribution</td><td data-label="Meaning">Rules that credit a conversion to an ad, typically one clicked within an attribution window (an allowed time between click and conversion).</td></tr>
+<tr><td data-label="Term">AUC</td><td data-label="Meaning">Area under the ROC curve: the probability that a random positive is scored above a random negative.</td></tr>
 <tr><td data-label="Term">Autobidding</td><td data-label="Meaning">The platform sets per-impression bids to meet an advertiser's budget and target CPA or ROAS.</td></tr>
+<tr><td data-label="Term">Bid landscape</td><td data-label="Meaning">The distribution of the highest competing bid for an impression; it gives the win probability at each bid.</td></tr>
+<tr><td data-label="Term">Bid shading</td><td data-label="Meaning">Bidding below value in a first-price auction, by an amount estimated from the competition.</td></tr>
 <tr><td data-label="Term">BPR</td><td data-label="Meaning">Bayesian personalized ranking: pairwise loss <x-tex>\ln\sigma(\hat x_{ui}-\hat x_{uj})</x-tex>.</td></tr>
 <tr><td data-label="Term">Calibration</td><td data-label="Meaning">Predicted probabilities match observed frequencies; required when predictions multiply bids.</td></tr>
-<tr><td data-label="Term">CPM / CPC / CPA</td><td data-label="Meaning">Price per 1,000 impressions / per click / per conversion (action).</td></tr>
-<tr><td data-label="Term">CTR / CVR</td><td data-label="Meaning">Clicks per impression / conversions per click.</td></tr>
+<tr><td data-label="Term">Candidate</td><td data-label="Meaning">An item passed from retrieval to the ranking stage.</td></tr>
+<tr><td data-label="Term">CCPA</td><td data-label="Meaning">California Consumer Privacy Act, in effect from January 2020.</td></tr>
+<tr><td data-label="Term">Censored data</td><td data-label="Meaning">Observations that reveal only a bound: a lost auction says only that the winning price exceeded your bid.</td></tr>
+<tr><td data-label="Term">Codebook</td><td data-label="Meaning">A learned set of vectors; quantization replaces a vector by the index of its nearest codebook vector.</td></tr>
+<tr><td data-label="Term">Cold start</td><td data-label="Meaning">Recommending a new item or to a new user with no interaction history.</td></tr>
+<tr><td data-label="Term">Conversion value</td><td data-label="Meaning">Revenue the advertiser reports for a conversion (in SKAdNetwork, instead, a 6-bit code the app defines).</td></tr>
+<tr><td data-label="Term">Conversion</td><td data-label="Meaning">The action an advertiser ultimately wants after an ad: an install, purchase or sign-up.</td></tr>
+<tr><td data-label="Term">CPM / CPC / CPA</td><td data-label="Meaning">Price per 1,000 impressions (cost per mille) / per click / per conversion (cost per action or acquisition).</td></tr>
+<tr><td data-label="Term">Creative</td><td data-label="Meaning">The ad itself: image, video and text assets.</td></tr>
+<tr><td data-label="Term">CTR / CVR</td><td data-label="Meaning">Click-through rate, clicks per impression / conversion rate, conversions per click.</td></tr>
+<tr><td data-label="Term">DCN / DCN-V2</td><td data-label="Meaning">Deep &amp; Cross Network: explicit cross layers on top of embeddings (Google, 2017; matrix version 2021).</td></tr>
+<tr><td data-label="Term">DIN / DIEN</td><td data-label="Meaning">Deep Interest Network: attention over a user's behaviours keyed on the candidate ad; Deep Interest Evolution Network adds a recurrent interest model (Alibaba).</td></tr>
+<tr><td data-label="Term">DLRM</td><td data-label="Meaning">Deep Learning Recommendation Model: Meta's 2019 reference architecture of embeddings, dot-product interactions and MLPs.</td></tr>
+<tr><td data-label="Term">DR (doubly robust estimator)</td><td data-label="Meaning">Off-policy estimate that combines a reward model with an inverse-propensity correction of its errors.</td></tr>
+<tr><td data-label="Term">DSP</td><td data-label="Meaning">Demand-side platform: bids in ad exchanges on advertisers' behalf.</td></tr>
+<tr><td data-label="Term">DSSM</td><td data-label="Meaning">Deep Structured Semantic Model: Microsoft's 2013 two-tower query–document model.</td></tr>
+<tr><td data-label="Term">EBR</td><td data-label="Meaning">Embedding-based retrieval: candidate retrieval by nearest-neighbour search over learned vectors.</td></tr>
 <tr><td data-label="Term">eCPM</td><td data-label="Meaning">Expected revenue per 1,000 impressions; the common ranking currency across pricing types.</td></tr>
-<tr><td data-label="Term">FM / FFM</td><td data-label="Meaning">Factorization machine / field-aware factorization machine.</td></tr>
+<tr><td data-label="Term">EM</td><td data-label="Meaning">Expectation–maximization: alternate between estimating latent variables and refitting parameters.</td></tr>
+<tr><td data-label="Term">Envy-free equilibrium</td><td data-label="Meaning">An auction outcome in which no bidder would rather have another bidder's position at that bidder's price.</td></tr>
+<tr><td data-label="Term">ESMM</td><td data-label="Meaning">Entire Space Multi-task Model: trains pCVR through pCTR × pCVR over all impressions (Alibaba, 2018).</td></tr>
+<tr><td data-label="Term">Examination probability</td><td data-label="Meaning">The chance a user looks at a given position at all, under the examination hypothesis of position bias.</td></tr>
+<tr><td data-label="Term">FAISS</td><td data-label="Meaning">Facebook AI Similarity Search: a library for fast vector search on CPUs and GPUs.</td></tr>
+<tr><td data-label="Term">Feature cross</td><td data-label="Meaning">A feature formed by combining others, such as user country × ad category.</td></tr>
+<tr><td data-label="Term">Field</td><td data-label="Meaning">A group of related categorical features, such as all user ids or all ad ids.</td></tr>
+<tr><td data-label="Term">First-party data</td><td data-label="Meaning">Data collected by the site or app the user is directly using, as opposed to third parties.</td></tr>
+<tr><td data-label="Term">First-price / second-price auction</td><td data-label="Meaning">The winner pays its own bid / the highest competing bid.</td></tr>
+<tr><td data-label="Term">Floor (reserve price)</td><td data-label="Meaning">The minimum price a seller accepts for an impression or click.</td></tr>
+<tr><td data-label="Term">FLOP</td><td data-label="Meaning">Floating-point operation; FLOPs is the count.</td></tr>
+<tr><td data-label="Term">FM / FFM</td><td data-label="Meaning">Factorization machine: a latent vector per feature, pairwise interactions as dot products / field-aware FM, one vector per feature per field.</td></tr>
 <tr><td data-label="Term">FTRL-Proximal</td><td data-label="Meaning">Follow-the-regularized-leader online learner with per-coordinate rates and L1 sparsity.</td></tr>
-<tr><td data-label="Term">GSP / VCG</td><td data-label="Meaning">Generalized second-price auction / Vickrey–Clarke–Groves mechanism.</td></tr>
-<tr><td data-label="Term">HSTU</td><td data-label="Meaning">Hierarchical sequential transduction unit: Meta's generative-recommender architecture (2024).</td></tr>
+<tr><td data-label="Term">Funnel (cascade)</td><td data-label="Meaning">Successive stages (retrieval, pre-rank, rank, re-rank) applying more expensive models to fewer items.</td></tr>
+<tr><td data-label="Term">GBDT</td><td data-label="Meaning">Gradient-boosted decision trees.</td></tr>
+<tr><td data-label="Term">GDPR</td><td data-label="Meaning">General Data Protection Regulation: the EU's personal-data law, enforceable from May 2018.</td></tr>
+<tr><td data-label="Term">GEM</td><td data-label="Meaning">Generative Ads Model: Meta's large foundation model for ads ranking (2025).</td></tr>
+<tr><td data-label="Term">Generative recommender (GR)</td><td data-label="Meaning">A model that treats a user's action history as a sequence and generates the next item or action (HSTU, OneRec).</td></tr>
+<tr><td data-label="Term">GFLOP</td><td data-label="Meaning">A billion floating-point operations.</td></tr>
+<tr><td data-label="Term">Ghost ads</td><td data-label="Meaning">Logging, in an experiment's control group, which ads would have been shown, to compare like with like.</td></tr>
+<tr><td data-label="Term">GRU</td><td data-label="Meaning">Gated recurrent unit: a recurrent neural network cell.</td></tr>
+<tr><td data-label="Term">GSP / VCG</td><td data-label="Meaning">Generalized second-price auction (pay the bid needed to keep your position) / Vickrey–Clarke–Groves mechanism (pay the value your presence costs others).</td></tr>
+<tr><td data-label="Term">Header bidding</td><td data-label="Meaning">A publisher queries several exchanges at once before calling its ad server.</td></tr>
+<tr><td data-label="Term">HNSW</td><td data-label="Meaning">Hierarchical navigable small world: a multi-layer proximity graph for approximate nearest-neighbour search.</td></tr>
+<tr><td data-label="Term">Holdout</td><td data-label="Meaning">A randomly chosen group of users not shown the ads, used to measure what the ads caused.</td></tr>
+<tr><td data-label="Term">HSTU</td><td data-label="Meaning">Hierarchical sequential transduction units: Meta's generative-recommender architecture (2024).</td></tr>
+<tr><td data-label="Term">IAB</td><td data-label="Meaning">Interactive Advertising Bureau: the industry body that maintains OpenRTB.</td></tr>
+<tr><td data-label="Term">IDFA</td><td data-label="Meaning">Identifier for Advertisers: Apple's per-device advertising ID, shared across apps only with ATT consent.</td></tr>
+<tr><td data-label="Term">Implicit feedback</td><td data-label="Meaning">Behaviour (plays, clicks, purchases) rather than explicit ratings; it has no explicit negatives.</td></tr>
+<tr><td data-label="Term">Impression</td><td data-label="Meaning">One display of one item or ad to one user.</td></tr>
+<tr><td data-label="Term">In-batch negatives</td><td data-label="Meaning">Using the other items in a training batch as negative examples for each positive.</td></tr>
 <tr><td data-label="Term">Incrementality</td><td data-label="Meaning">Conversions caused by the ad, measured by randomized holdout; contrast with attributed conversions.</td></tr>
 <tr><td data-label="Term">IPS</td><td data-label="Meaning">Inverse propensity scoring: reweight logged outcomes by the inverse probability of the logged action or exposure.</td></tr>
+<tr><td data-label="Term">ITP</td><td data-label="Meaning">Intelligent Tracking Prevention: Safari's third-party cookie restrictions, from 2017.</td></tr>
+<tr><td data-label="Term">Knowledge distillation</td><td data-label="Meaning">Training a small model to imitate the outputs of a larger one.</td></tr>
+<tr><td data-label="Term">Lift</td><td data-label="Meaning">The relative increase in conversions caused by ads: exposed versus holdout.</td></tr>
+<tr><td data-label="Term">LinUCB / UCB</td><td data-label="Meaning">Linear upper confidence bound: a contextual bandit that adds a confidence width to a ridge-regression estimate.</td></tr>
+<tr><td data-label="Term">Liquid welfare</td><td data-label="Meaning">Total value won by bidders, each advertiser's value capped by what it can spend.</td></tr>
+<tr><td data-label="Term">LLM</td><td data-label="Meaning">Large language model.</td></tr>
 <tr><td data-label="Term">logQ correction</td><td data-label="Meaning">Subtract the log sampling probability from logits when training with sampled (in-batch) negatives.</td></tr>
-<tr><td data-label="Term">oCPM / oCPC</td><td data-label="Meaning">Optimized CPM / CPC: the advertiser targets outcomes, the platform sets impression or click bids with its predictions.</td></tr>
+<tr><td data-label="Term">Long tail</td><td data-label="Meaning">The many items that each receive few interactions.</td></tr>
+<tr><td data-label="Term">MF</td><td data-label="Meaning">Matrix factorization: a learned low-dimensional vector per user and per item, rating ≈ dot product.</td></tr>
+<tr><td data-label="Term">MFU</td><td data-label="Meaning">Model FLOPs utilization: the share of the hardware's peak arithmetic throughput a model actually uses.</td></tr>
+<tr><td data-label="Term">MLP</td><td data-label="Meaning">Multilayer perceptron: a stack of fully connected layers.</td></tr>
+<tr><td data-label="Term">MMoE / PLE</td><td data-label="Meaning">Multi-gate Mixture-of-Experts / Progressive Layered Extraction: multi-task architectures that share expert subnetworks.</td></tr>
+<tr><td data-label="Term">Modelled conversions</td><td data-label="Meaning">Conversions a platform estimates, rather than observes, after privacy changes hid them.</td></tr>
+<tr><td data-label="Term">NCF</td><td data-label="Meaning">Neural collaborative filtering: an MLP in place of the MF dot product (2017).</td></tr>
+<tr><td data-label="Term">oCPM / oCPC</td><td data-label="Meaning">Optimized CPM / CPC: the advertiser targets conversions, the platform sets impression or click bids with its predictions.</td></tr>
+<tr><td data-label="Term">OpenRTB</td><td data-label="Meaning">Open real-time bidding: the IAB's bid request/response protocol.</td></tr>
+<tr><td data-label="Term">OPEX</td><td data-label="Meaning">Operating expense.</td></tr>
+<tr><td data-label="Term">Pacing</td><td data-label="Meaning">Controlling how fast a campaign spends its budget over the day.</td></tr>
+<tr><td data-label="Term">PAL</td><td data-label="Meaning">Position-bias-aware learning: Huawei's model with separate position and relevance towers (2019).</td></tr>
+<tr><td data-label="Term">pCTR / pCVR</td><td data-label="Meaning">Predicted click-through rate / predicted conversion rate.</td></tr>
+<tr><td data-label="Term">Placement</td><td data-label="Meaning">Where an ad appears: which app, site, surface or slot.</td></tr>
+<tr><td data-label="Term">PNN</td><td data-label="Meaning">Product-based Neural Network: inner/outer products of field embeddings fed to an MLP.</td></tr>
+<tr><td data-label="Term">Position bias</td><td data-label="Meaning">Users click higher positions more regardless of relevance.</td></tr>
+<tr><td data-label="Term">Postback</td><td data-label="Meaning">Apple's delayed, aggregated attribution message to an ad network under SKAdNetwork.</td></tr>
+<tr><td data-label="Term">Price of anarchy</td><td data-label="Meaning">Worst-case ratio of the best achievable welfare to the welfare at equilibrium.</td></tr>
+<tr><td data-label="Term">Propensity</td><td data-label="Meaning">The probability that an item was shown or observed under the policy that produced the logs.</td></tr>
+<tr><td data-label="Term">Publisher</td><td data-label="Meaning">Owner of the site or app whose ad slots are sold.</td></tr>
+<tr><td data-label="Term">QPS</td><td data-label="Meaning">Queries (requests) per second.</td></tr>
+<tr><td data-label="Term">Quality Score</td><td data-label="Meaning">Google's rating of an ad's expected click rate and relevance, used in ranking and minimum bids.</td></tr>
+<tr><td data-label="Term">RBM</td><td data-label="Meaning">Restricted Boltzmann machine.</td></tr>
+<tr><td data-label="Term">REINFORCE</td><td data-label="Meaning">The basic policy-gradient algorithm: scale the gradient of an action's log-probability by its reward.</td></tr>
+<tr><td data-label="Term">Replay evaluation</td><td data-label="Meaning">Scoring a new policy only on logged events where it agrees with a randomized logging policy.</td></tr>
+<tr><td data-label="Term">Retrieval / ranking</td><td data-label="Meaning">Cheap selection of a few thousand candidates from the whole corpus / expensive scoring of those candidates.</td></tr>
+<tr><td data-label="Term">RMSE</td><td data-label="Meaning">Root-mean-square error.</td></tr>
 <tr><td data-label="Term">ROAS</td><td data-label="Meaning">Return on ad spend: attributed revenue divided by ad spend.</td></tr>
+<tr><td data-label="Term">RQ-VAE</td><td data-label="Meaning">Residual-quantized variational autoencoder: learns the codebooks that turn a content embedding into a semantic ID.</td></tr>
 <tr><td data-label="Term">RTB</td><td data-label="Meaning">Real-time bidding: per-impression auctions on exchanges, standardized by OpenRTB.</td></tr>
+<tr><td data-label="Term">Sampled softmax</td><td data-label="Meaning">A softmax normalized over a sample of negatives instead of all classes, with a correction for the sampling.</td></tr>
+<tr><td data-label="Term">SASRec / BERT4Rec</td><td data-label="Meaning">Self-attentive sequential recommendation (causal) / bidirectional masked Transformer for sequences.</td></tr>
+<tr><td data-label="Term">ScaNN</td><td data-label="Meaning">Scalable Nearest Neighbors: Google's vector search with inner-product-aware quantization.</td></tr>
 <tr><td data-label="Term">Semantic ID</td><td data-label="Meaning">A short tuple of discrete codes for an item, built by quantizing its content embedding, so similar items share prefixes.</td></tr>
+<tr><td data-label="Term">Session</td><td data-label="Meaning">The sequence of a user's actions in one visit.</td></tr>
+<tr><td data-label="Term">SGD</td><td data-label="Meaning">Stochastic gradient descent.</td></tr>
+<tr><td data-label="Term">Shadow price</td><td data-label="Meaning">The Lagrange multiplier of a constraint: the value of relaxing it by one unit (for a budget, one dollar).</td></tr>
+<tr><td data-label="Term">SIM</td><td data-label="Meaning">Search-based Interest Model: retrieve relevant behaviours from a lifelong sequence, then attend over them (Alibaba).</td></tr>
 <tr><td data-label="Term">SKAdNetwork</td><td data-label="Meaning">Apple's aggregated, delayed install-attribution API (from iOS 11.3, 2018).</td></tr>
+<tr><td data-label="Term">Stay time</td><td data-label="Meaning">Total time users spend in an app.</td></tr>
+<tr><td data-label="Term">SVD / SVD++</td><td data-label="Meaning">Singular value decomposition; in Netflix-era usage, a regularized factor model fit on observed ratings (SVD++ adds implicit feedback).</td></tr>
+<tr><td data-label="Term">TF-IDF</td><td data-label="Meaning">Term frequency × inverse document frequency: a keyword weighting for content-based filtering.</td></tr>
+<tr><td data-label="Term">Throttling</td><td data-label="Meaning">Pacing by entering only a random fraction of eligible auctions.</td></tr>
+<tr><td data-label="Term">TIGER</td><td data-label="Meaning">Transformer Index for GEnerative Recommenders: generative retrieval over semantic IDs (Google, 2023).</td></tr>
+<tr><td data-label="Term">Truthful auction</td><td data-label="Meaning">One in which bidding your true value is a dominant strategy (second price, VCG).</td></tr>
 <tr><td data-label="Term">Two-tower model</td><td data-label="Meaning">Separate user and item networks scored by a dot product, so item vectors can be indexed for ANN retrieval.</td></tr>
+<tr><td data-label="Term">Uplift model</td><td data-label="Meaning">A model that ranks users by the predicted effect of treatment (an ad) rather than the predicted outcome.</td></tr>
+<tr><td data-label="Term">Value maximizer</td><td data-label="Meaning">A bidder that maximizes total value won subject to spend constraints, ignoring per-impression surplus.</td></tr>
+</tbody></table></div>
+<h3 id="ar-venues">Conference and journal abbreviations</h3>
+<div class="ar-table-wrap"><table>
+<thead><tr><th>Venue</th><th>Full name</th></tr></thead>
+<tbody>
+<tr><td data-label="Venue">AAAI</td><td data-label="Full name">AAAI Conference on Artificial Intelligence</td></tr>
+<tr><td data-label="Venue">ADKDD</td><td data-label="Full name">Workshop on Data Mining for Online Advertising (at KDD)</td></tr>
+<tr><td data-label="Venue">AER</td><td data-label="Full name">American Economic Review</td></tr>
+<tr><td data-label="Venue">CACM</td><td data-label="Full name">Communications of the ACM</td></tr>
+<tr><td data-label="Venue">CHI</td><td data-label="Full name">ACM Conference on Human Factors in Computing Systems</td></tr>
+<tr><td data-label="Venue">CIKM</td><td data-label="Full name">ACM Conference on Information and Knowledge Management</td></tr>
+<tr><td data-label="Venue">CSCW</td><td data-label="Full name">ACM Conference on Computer-Supported Cooperative Work</td></tr>
+<tr><td data-label="Venue">DLRS</td><td data-label="Full name">Workshop on Deep Learning for Recommender Systems (at RecSys)</td></tr>
+<tr><td data-label="Venue">DSS</td><td data-label="Full name">Decision Support Systems (journal)</td></tr>
+<tr><td data-label="Venue">ICDM</td><td data-label="Full name">IEEE International Conference on Data Mining</td></tr>
+<tr><td data-label="Venue">ICLR</td><td data-label="Full name">International Conference on Learning Representations</td></tr>
+<tr><td data-label="Venue">ICML</td><td data-label="Full name">International Conference on Machine Learning</td></tr>
+<tr><td data-label="Venue">IEEE S&amp;P</td><td data-label="Full name">IEEE Symposium on Security and Privacy</td></tr>
+<tr><td data-label="Venue">IJCAI</td><td data-label="Full name">International Joint Conference on Artificial Intelligence</td></tr>
+<tr><td data-label="Venue">IJIO</td><td data-label="Full name">International Journal of Industrial Organization</td></tr>
+<tr><td data-label="Venue">JMLR</td><td data-label="Full name">Journal of Machine Learning Research</td></tr>
+<tr><td data-label="Venue">JMR</td><td data-label="Full name">Journal of Marketing Research</td></tr>
+<tr><td data-label="Venue">KDD</td><td data-label="Full name">ACM SIGKDD Conference on Knowledge Discovery and Data Mining</td></tr>
+<tr><td data-label="Venue">NeurIPS (NIPS)</td><td data-label="Full name">Conference on Neural Information Processing Systems</td></tr>
+<tr><td data-label="Venue">OSDI</td><td data-label="Full name">USENIX Symposium on Operating Systems Design and Implementation</td></tr>
+<tr><td data-label="Venue">QJE</td><td data-label="Full name">Quarterly Journal of Economics</td></tr>
+<tr><td data-label="Venue">RecSys</td><td data-label="Full name">ACM Conference on Recommender Systems</td></tr>
+<tr><td data-label="Venue">SIGIR</td><td data-label="Full name">ACM SIGIR Conference on Research and Development in Information Retrieval</td></tr>
+<tr><td data-label="Venue">UAI</td><td data-label="Full name">Conference on Uncertainty in Artificial Intelligence</td></tr>
+<tr><td data-label="Venue">WINE</td><td data-label="Full name">Conference on Web and Internet Economics</td></tr>
+<tr><td data-label="Venue">WSDM</td><td data-label="Full name">ACM Conference on Web Search and Data Mining</td></tr>
+<tr><td data-label="Venue">WWW</td><td data-label="Full name">The Web Conference (International World Wide Web Conference)</td></tr>
 </tbody></table></div>
 
 <h2 id="ar-review">Review record</h2>
-<p><strong>How the content was checked.</strong> Each chapter was drafted from the primary literature, then 50 specific dated or numeric claims were sent to two independent fact-checking passes that searched primary sources (papers, company posts, SEC filings, standards documents) without seeing the draft text. A third independent pass re-derived every formula, recomputed every worked example, exercise and chart, and checked 17 further claims; it found no substantive math errors, three wording slips in worked examples (fixed) and the content issues below.</p>
+<p><strong>How the content was checked.</strong> Each chapter was drafted from the primary literature, then 50 specific dated or numeric claims were sent to two independent fact-checking passes that searched primary sources (papers, company posts, SEC filings, standards documents) without seeing the draft text. A third independent pass re-derived every formula, recomputed every worked example, exercise and chart, and checked 17 further claims; it found no substantive math errors, three wording slips in worked examples (fixed) and the content issues below. A fourth pass read the reader as a newcomer would, checking that every term and every symbol is defined at or before its first use in each chapter; it led to the definitions now given in each chapter, the glossary below, a test that fails if any abbreviation is missing from the glossary, and the symbol and correctness fixes in the last rows of this table.</p>
 <div class="ar-table-wrap"><table>
 <thead><tr><th>Claim in the first draft</th><th>Finding</th><th>Change made</th></tr></thead>
 <tbody>
@@ -132,6 +263,14 @@
 <tr><td data-label="Claim in the first draft">Optimal RTB bids are concave because win probability is concave</td><td data-label="Finding">Concavity comes from the budget constraint together with the concave win curve</td><td data-label="Change made">Reason corrected in chapter 6</td></tr>
 <tr><td data-label="Claim in the first draft">SIM extends history to thousands of events; FFM wins “in 2014”</td><td data-label="Finding">SIM handles up to about 54,000 events; Avazu ran into 2015</td><td data-label="Change made">Corrected in chapters 4 and 5</td></tr>
 <tr><td data-label="Claim in the first draft">Budget and autobidding multipliers stated as exactly optimal</td><td data-label="Finding">Exact for the linear relaxation; indivisible impressions leave a marginal gap</td><td data-label="Change made">Scope added to both derivations in chapter 6</td></tr>
+<tr><td data-label="Claim in the first draft">Matrix-factorization regularizer written outside the sum over ratings</td><td data-label="Finding">Leaves <x-tex>u,i</x-tex> unbound; Koren puts it inside the sum</td><td data-label="Change made">Objective rewritten in chapter 4 with every symbol defined</td></tr>
+<tr><td data-label="Claim in the first draft">Without a budget, the optimal RTB bid is linear in value</td><td data-label="Finding">True only for truthful second-price bidding; first-price surplus maximizers shade non-linearly</td><td data-label="Change made">Claim removed from chapter 6</td></tr>
+<tr><td data-label="Claim in the first draft">ESMM “fixes” conversion-rate selection bias</td><td data-label="Finding">Later work (ESCM², SIGIR 2022) showed ESMM's pCVR is still biased</td><td data-label="Change made">“Reduces” in chapters 5 and 9, with the follow-up cited</td></tr>
+<tr><td data-label="Claim in the first draft">Browsers and Apple removed most cross-site identifiers by 2021</td><td data-label="Finding">Chrome, the majority browser, kept third-party cookies</td><td data-label="Change made">Chapter 7 names Safari, Firefox, the EU and iOS, and states Chrome's exception</td></tr>
+<tr><td data-label="Claim in the first draft">Conversion Optimizer (2007) bid to a target CPA</td><td data-label="Finding">It bid to a maximum CPA; target CPA arrived in 2010</td><td data-label="Change made">Timeline entry corrected</td></tr>
+<tr><td data-label="Claim in the first draft">TIGER quantizes the text-encoder output, encoder learned jointly</td><td data-label="Finding">The text encoder is frozen; the RQ-VAE has its own encoder whose latent is quantized</td><td data-label="Change made">Chapter 8 describes both steps</td></tr>
+<tr><td data-label="Claim in the first draft">DSSM was “the first two-tower model”; Gordon et al. “ran” the Facebook experiments</td><td data-label="Finding">Siamese networks came earlier; Gordon et al. analysed experiments run on Facebook</td><td data-label="Change made">“An early two-tower model for search”; “analysed”</td></tr>
+<tr><td data-label="Claim in the first draft">Symbols reused within a chapter (α, θ, λ, p, r, c, n, the logging policy, elapsed time written as <x-tex>e</x-tex>)</td><td data-label="Finding">Same letter with two or three meanings in chapters 4, 5 and 7</td><td data-label="Change made">Renamed (for example confidence slope <x-tex>\omega</x-tex>, preference <x-tex>s_{ui}</x-tex>, delay rate <x-tex>h</x-tex>, elapsed time <x-tex>\tau</x-tex>, one logging policy <x-tex>\mu</x-tex>); every symbol now defined where used</td></tr>
 <tr><td data-label="Claim in the first draft">AI Overviews ads launched in the US in 2024</td><td data-label="Finding">October 3, 2024, mobile only; desktop in 2025</td><td data-label="Change made">Qualified in chapters 2 and 8</td></tr>
 </tbody></table></div>
 <p><strong>Confirmed without change</strong> (selection): Netflix Prize dataset sizes and RMSE figures; AdWords launch (October 2000) and AdWords Select (February 2002); Overture's GSP switch (2002) and Yahoo acquisition ($1.63B, 2003); Yahoo Panama (February 2007); Quality Score minimum bids (August 2005); Conversion Optimizer (2007), Target CPA (2010), Smart Bidding (2016); Prebid.js (2015); Ad Manager first price (March–September 2019); Performance Max (November 2021); Advantage+ shopping (August 2022); AXON 2.0 (Q2 2023); Meta's $10B ATT estimate (February 2, 2022); Privacy Sandbox dates (2019, July 2024, April 2025, October 17, 2025); SKAdNetwork (iOS 11.3) and ATT (iOS 14.5, April 26, 2021); ITP (Safari 11, 2017); GDPR and CCPA dates; Wide &amp; Deep's +3.9%/+2.9%; HSTU's 1.5T parameters, +12.4%, 5.3–15.2× speed-up and three-orders scaling; Wukong's two-orders scaling past 100 GFLOP/example; OneRec's 25% QPS, +0.54%/+1.24% stay time, 10.6% OPEX and MFU figures; Twitter's ~1,500 candidates and ~48M heavy ranker; OpenAI's January 16, 2026 ads announcement; Dacrema et al.'s 7-of-18 and 6-beaten; SIM's 54,000-length sequences; PinSage's 3B nodes and 18B edges; FFM's Criteo and Avazu wins; the logQ and top-<x-tex>K</x-tex> formulas; the autobidding uniform-scaling and price-of-anarchy-2 results.</p>
