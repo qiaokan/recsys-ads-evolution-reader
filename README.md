@@ -1,6 +1,8 @@
 # Recommendation & Ads Algorithms, 1992–2026: An Evolution Reader
 
-An interactive reader on how recommendation and advertising algorithms evolved: collaborative filtering and keyword auctions, matrix factorization and planet-scale logistic regression, deep ranking and the multi-stage funnel, exchanges / first-price auctions / autobidding, bias, causality and the privacy shock, and scaling laws and generative recommenders. A companion to the [Computational Advertising reader](https://github.com/qiaokan/computational-advertising-reader), built on the same toolchain.
+An interactive reader on how recommendation and advertising algorithms evolved: collaborative filtering and keyword auctions, matrix factorization and planet-scale logistic regression, deep ranking and the multi-stage funnel, exchanges / first-price auctions / autobidding, bias, causality and the privacy shock, and scaling laws and generative recommenders. Live site: https://recsys-ads-evolution-reader.vercel.app
+
+A companion to the [Computational Advertising reader](https://github.com/qiaokan/computational-advertising-reader), built on the same toolchain.
 
 ## Contents
 
@@ -42,4 +44,4 @@ npm test
 python3 -m http.server 8000 --directory dist
 ```
 
-The page is a single self-contained HTML file with no external requests. Deploy `dist/` as a static site (the included `vercel.json` serves it with no build step).
+The page is a single self-contained HTML file with no external requests. Vercel serves `dist/` with no build step, so commit `dist/index.html` after building; every push to `main` deploys to production.

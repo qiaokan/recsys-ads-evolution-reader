@@ -2,3 +2,4 @@
 .openai/
 .env*
 node_modules/
+.vercel
