@@ -6,7 +6,7 @@ const path = require('node:path');
 const html = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf8');
 const failures = [];
 const check = (ok, msg) => { if (!ok) failures.push(msg); };
-const TRACKS = new Set(['recs', 'ads', 'sys', 'eval', 'privacy']);
+const TRACKS = new Set(['recs', 'ads', 'sys', 'eval', 'privacy', 'llm']);
 const ERA = { 1: [1992, 2005], 2: [2006, 2013], 3: [2013, 2020], 5: [2021, 2026] };
 
 const items = [...html.matchAll(/<li class="ar-ms" data-year="(\d{4})" data-era="(\d)" data-track="([a-z ]+)"><span class="ar-t">(\d{4})<\/span><div>([\s\S]*?)<\/div><\/li>/g)]

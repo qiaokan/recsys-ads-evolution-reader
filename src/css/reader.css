@@ -406,3 +406,12 @@ input[type="range"] { width: 100%; height: 24px; margin: 0; accent-color: var(--
 .ar-inference { margin: 1.4em 0; padding: 0 0 0 16px; border-left: 3px solid var(--warm); color: var(--ink-2); }
 .ar-inference > strong:first-child { font: 650 .78em/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--warm); margin-right: .35em; }
 .ar-srclist li { margin-bottom: .45em; }
+
+/* ---------- Two-tower diagram (chapter 5) ---------- */
+.ar-tt { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ar-tt-col { display: flex; flex-direction: column; gap: 6px; }
+.ar-tt-col .ar-arrow, .ar-tt-join .ar-arrow { align-self: center; }
+.ar-tt-vec { background: var(--surface-2); font-family: var(--mono); }
+.ar-tt-join { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 6px; }
+.ar-tt-score { width: 100%; max-width: 380px; flex: none; background: var(--warm-soft); }
+.ar-flow-wrap { flex-wrap: wrap; }

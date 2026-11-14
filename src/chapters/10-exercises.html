@@ -1,11 +1,11 @@
-<article class="ar-lesson" id="ar-chapter-8" data-nav="Exercises" data-time="60 min" data-gist="30" data-full="60"><h1>Exercises with worked answers</h1>
+<article class="ar-lesson" id="ar-chapter-9" data-nav="Exercises" data-time="60 min" data-gist="30" data-full="60"><h1>Exercises with worked answers</h1>
 <aside class="ar-callout ar-key"><p class="ar-callout-title">In this chapter</p><ul>
-<li>Gist set (six problems, 30 minutes): the conceptual core of each era, with light arithmetic.</li>
-<li>Depth set (eight problems, 30 minutes): the derivations from chapters 4–7, with numbers you can check by hand.</li>
+<li>Gist set (seven problems, 30 minutes): the conceptual core of each era, with light arithmetic.</li>
+<li>Depth set (nine problems, 30 minutes): the derivations from chapters 4–7 and 9, with numbers you can check by hand.</li>
 <li>Try each before opening the answer; every answer ends with a check.</li>
 <li>Terms are defined at first use here and collected in the <a href="#glossary">glossary</a>.</li>
 </ul></aside>
-<p class="ar-gist"><strong>The gist.</strong> If you can price a quality-weighted auction, de-bias a click log, explain why an autobidder may bid above value and grade a claim by its evidence, you have the gist path. The depth set tests whether you can redo the key derivations: the implicit-ALS saving, the watch-time odds, the logQ correction, budget multipliers, bid shading, delayed feedback and ESMM.</p>
+<p class="ar-gist"><strong>The gist.</strong> If you can price a quality-weighted auction, de-bias a click log, explain why an autobidder may bid above value, grade a claim by its evidence and say where an LLM can afford to run, you have the gist path. The depth set tests whether you can redo the key derivations: the implicit-ALS saving, the watch-time odds, the logQ correction, budget multipliers, bid shading, delayed feedback, ESMM and the cost of an LLM ranker.</p>
 
 <h2 id="ar-exercises-gist">Gist set</h2>
 
@@ -43,6 +43,12 @@
 <p><strong>Problem.</strong> Grade each: (a) “HSTU is a sequential transducer with pointwise rather than softmax attention.” (b) “A new ads model drove a 5% increase in conversions on Instagram last quarter,” said on an earnings call. (c) “Platforms with closed ecosystems lost less signal from ATT.”</p>
 <p><strong>Answer.</strong> (a) <span class="ar-ev ar-ev-paper">Paper</span>: an architectural fact stated in the ICML 2024 paper. (b) <span class="ar-ev ar-ev-call">Call</span>: management's attribution of a business metric; baseline, duration and measurement method undisclosed. (c) <span class="ar-ev ar-ev-inf">Inference</span>: plausible from the mechanism, not a measured result in a cited source.</p>
 <p class="ar-check">Check: only (a) could be verified by someone outside the company, by reading the paper and code.</p>
+</div></details>
+
+<details class="ar-exercise"><summary>G7 · Where does the LLM run? (chapter 9)</summary><div class="ar-answer">
+<p><strong>Problem.</strong> For each use, say whether the LLM runs per item (offline), per query (cached or tail-only), or per candidate per request, and whether that is affordable at 10,000 requests per second: (a) embedding every new video's title and description; (b) rewriting rare search queries; (c) scoring 500 ranked candidates for every request with a 7-billion-parameter model; (d) reviewing every newly submitted ad against policy.</p>
+<p><strong>Answer.</strong> (a) Per item, offline: affordable, the cost is paid once per item and cached. (b) Per query, cached for frequent queries with live inference only for the rare tail (Instacart sends about 2% of traffic to the live model): affordable. (c) Per candidate per request: about <x-tex>7\times10^{18}</x-tex> FLOPs per second in chapter 9's example, thousands of accelerators for ranking alone: not affordable; distil instead. (d) Per ad, at submission, with minutes of latency allowed: affordable.</p>
+<p class="ar-check">Check: the affordable uses are exactly those whose cost does not multiply by candidates × requests.</p>
 </div></details>
 
 <h2 id="ar-exercises-depth">Depth set</h2>
@@ -93,5 +99,10 @@
 <p><strong>Problem.</strong> A platform reports that a new foundation ranking model raised ad conversions by 5%. Twelve months later, advertisers' own holdout tests (randomized groups not shown the ads, <a href="#chapter-7">chapter 7</a>) show no change in incremental sales. Give three mechanisms that would reconcile both facts.</p>
 <p><strong>Answer.</strong> (1) <em>Attribution, not incrementality</em>: the model got better at reaching people who would have converted anyway, raising attributed conversions without causing more. (2) <em>Measurement by the optimizer</em>: reported conversions include modelled conversions from the same platform, so the metric partly moves with the model. (3) <em>Mix and novelty</em>: the A/B test ran on a favourable slice or a short window; gains decayed as advertisers' bids, budgets and competitors adapted (the auction is an equilibrium, not a fixed environment).</p>
 <p class="ar-check">Check: each mechanism predicts something testable: (1) attributed and incremental conversions diverge in a ghost-ad holdout (one that logs which ads the control group would have seen); (2) observed-only conversions rise less than reported ones; (3) the lift shrinks with test duration.</p>
+</div></details>
+<details class="ar-exercise"><summary>D9 · The price of an LLM ranker, and of distilling it (chapter 9)</summary><div class="ar-answer">
+<p><strong>Problem.</strong> A 3-billion-parameter LLM would score each candidate from 50 tokens. (a) FLOPs per candidate, using <x-tex>\text{FLOPs}\approx2PT</x-tex>? (b) With 300 candidates per request and 5,000 requests per second, total FLOPs per second? (c) Instead, the LLM labels 100 million query–item pairs once (same 50 tokens each) and a student model costing <x-tex>10^7</x-tex> FLOPs per candidate serves. How many seconds of serving at that traffic does the one-time labeling cost equal, if the LLM had served live?</p>
+<p><strong>Answer.</strong> (a) <x-tex>2\times3\times10^9\times50=3\times10^{11}</x-tex>. (b) <x-tex>3\times10^{11}\times300\times5{,}000=4.5\times10^{17}</x-tex> FLOPs per second. (c) Labeling: <x-tex>10^8\times3\times10^{11}=3\times10^{19}</x-tex> FLOPs, equal to <x-tex>3\times10^{19}/4.5\times10^{17}\approx67</x-tex> seconds of live LLM serving. The student then serves at <x-tex>10^7\times300\times5{,}000=1.5\times10^{13}</x-tex> FLOPs per second, 30,000 times less than the LLM.</p>
+<p class="ar-check">Check: the one-time labeling job costs as much as about 67 seconds of live LLM ranking, which would otherwise run continuously. That asymmetry is why distillation is the dominant production pattern.</p>
 </div></details>
 </article>

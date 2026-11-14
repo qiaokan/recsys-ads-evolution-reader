@@ -24,8 +24,8 @@ for (const [, cell] of gl.matchAll(/<td data-label="(?:Term|Venue)">([\s\S]*?)<\
 
 // Proper names, roman numerals, exercise labels and general computing terms: not glossary material.
 const ALLOW = new Set(`AT T PARC MIT IEEE DVD NVIDIA US EU SEC URL API AI GPU CPU ID I II III IV V Q1 Q2 Q3 Q4
-  G1 G2 G3 G4 G5 G6 D1 D2 D3 D4 D5 D6 D7 D8 ETH UCL AXON GPT MTIA CHIPS FLEDGE FALCON M CIN L1 L2 P5 ROC S P
-  CDF NIPS OK ACM SIGKDD USENIX ESCM T5`.split(/\s+/));
+  G1 G2 G3 G4 G5 G6 G7 D1 D2 D3 D4 D5 D6 D7 D8 D9 BEQUE PLUM LEARN COSMO KAR LC ETH UCL AXON GPT MTIA CHIPS FLEDGE FALCON M CIN L1 L2 P5 ROC S P
+  CDF NIPS OK ACM SIGKDD USENIX ESCM T5 BERT`.split(/\s+/));
 
 const missing = new Map();
 for (const m of body.matchAll(/\b[A-Z][A-Z0-9]+s?\b/g)) {

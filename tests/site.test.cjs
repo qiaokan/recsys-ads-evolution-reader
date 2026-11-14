@@ -16,10 +16,10 @@ assert.doesNotMatch(html, /<iframe\b/, 'no iframe wrapper');
 assert.doesNotMatch(html, /<x-tex\b/, 'all TeX rendered at build time');
 assert.doesNotMatch(html, /<x-chart\b/, 'all charts rendered at build time');
 
-// Ten chapters, only the first visible without JavaScript.
-const articles = [...html.matchAll(/<article class="ar-lesson" id="ar-chapter-(\d)"[^>]*>/g)];
-assert.deepEqual(articles.map((m) => m[1]), ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
-assert.deepEqual(articles.map((m) => /\shidden\b/.test(m[0])), [false, true, true, true, true, true, true, true, true, true]);
+// Eleven chapters, only the first visible without JavaScript.
+const articles = [...html.matchAll(/<article class="ar-lesson" id="ar-chapter-(\d+)"[^>]*>/g)];
+assert.deepEqual(articles.map((m) => m[1]), ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']);
+assert.deepEqual(articles.map((m) => /\shidden\b/.test(m[0])), [false, true, true, true, true, true, true, true, true, true, true]);
 
 // Every chapter except the reference chapter opens with a plain-words gist.
 const lessons = html.split(/<article class="ar-lesson"/).slice(1);
@@ -32,7 +32,7 @@ check(dupes.length === 0, `duplicate ids: ${[...new Set(dupes)].join(', ')}`);
 const idSet = new Set(ids);
 for (const [, target] of html.matchAll(/href="#([^"]*)"/g)) {
   const m = /^chapter-(\d+)$/.exec(target);
-  check(m ? +m[1] >= 1 && +m[1] <= 10 : idSet.has(target), `broken in-page link #${target}`);
+  check(m ? +m[1] >= 1 && +m[1] <= 11 : idSet.has(target), `broken in-page link #${target}`);
 }
 
 // Mobile table layout: each data-label equals its column header.
@@ -59,7 +59,7 @@ check(!/\{\{[A-Z_]+\}\}/.test(html), 'unreplaced template placeholder');
 
 // Hero totals equal the per-chapter reading times stated in chapter 1.
 const stat = (k) => +(html.match(new RegExp(`<dt>${k}</dt><dd>(\\d+)`)) || [])[1];
-check(stat('Gist path') === 135 && stat('Full path') === 390, `hero totals ${stat('Gist path')}/${stat('Full path')} ≠ 135/390`);
+check(stat('Gist path') === 145 && stat('Full path') === 430, `hero totals ${stat('Gist path')}/${stat('Full path')} ≠ 145/430`);
 
 // Evidence badges only use the four defined grades.
 for (const [, cls] of html.matchAll(/class="ar-ev ar-ev-([a-z]+)"/g)) check(['paper', 'post', 'call', 'inf'].includes(cls), `unknown evidence grade ${cls}`);
@@ -71,4 +71,4 @@ if (failures.length) {
   console.error(`FAIL (${failures.length}):\n- ` + [...new Set(failures)].join('\n- '));
   process.exit(1);
 }
-console.log('PASS: self-contained page, ten chapters, chapter gists, unique ids, resolvable links, table labels, hero totals, evidence grades.');
+console.log('PASS: self-contained page, eleven chapters, chapter gists, unique ids, resolvable links, table labels, hero totals, evidence grades.');

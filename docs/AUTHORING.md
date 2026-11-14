@@ -8,7 +8,7 @@ Same toolchain and components as the companion Computational Advertising reader 
 - Each section opens with a bold sentence stating its claim (the gist path reads only these).
 - Every company claim carries an evidence badge: `<span class="ar-ev ar-ev-paper">Paper</span>`, `ar-ev-post` (engineering blog, documentation, press record), `ar-ev-call` (earnings call, investor letter), `ar-ev-inf` (this reader's interpretation). Interpretive paragraphs use `<p class="ar-inference"><strong>Inference.</strong> …</p>`.
 - Quote company-reported gains with their scope (metric, surface, period). Never present them as reproduced.
-- Every new dated or numeric claim gets a source in chapter 10 and an entry in the review record if it was corrected.
+- Every new dated or numeric claim gets a source in chapter 11 and an entry in the review record if it was corrected.
 
 ## Timeline milestones (chapter 2)
 
