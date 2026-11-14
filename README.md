@@ -7,11 +7,11 @@ A companion to the [Computational Advertising reader](https://github.com/qiaokan
 ## Contents
 
 1. Start here: six through-lines, what each model family predicts, five eras, evidence grades, reading paths
-2. Interactive timeline: 98 dated milestones, filterable by track, era and keyword
+2. Interactive timeline: 101 dated milestones, filterable by track, era and keyword
 3. Era I (1992–2005): neighbourhoods and keyword auctions (GroupLens, Amazon item-to-item, GoTo, GSP vs VCG)
 4. Era II (2006–2013): latent factors and linear models (Netflix Prize, MF, implicit ALS, BPR, FM, FTRL, bandits)
 5. Era III (2013–2020): embeddings, deep ranking and the funnel (YouTube DNN, Wide & Deep, DCN, DIN, two-tower models and when ANN search is needed, logQ, ESMM, MMoE, reproducibility audits)
-6. Ads track (2007–2026): RTB, oCPM/oCPC, pacing, first-price shading, autobidding, campaign automation
+6. Ads track (2007–2026): RTB, oCPM/oCPC, pacing, first-price shading, autobidding, D7 revenue and lifetime-value prediction (ZILN and successors), campaign automation
 7. Cross-cutting: position bias and IPS, off-policy evaluation, delayed feedback, incrementality, ITP/GDPR/ATT/Privacy Sandbox
 8. Era V (2021–2026): scaling laws, semantic IDs, HSTU, OneRec, Andromeda/GEM, ads in AI answers
 9. LLMs in recommendation and advertising: encoders, labelers and teachers, query understanding, LLM rankers, advertiser tools, conversational surfaces and ads inside AI answers
