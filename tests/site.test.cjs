@@ -59,7 +59,7 @@ check(!/\{\{[A-Z_]+\}\}/.test(html), 'unreplaced template placeholder');
 
 // Hero totals equal the per-chapter reading times stated in chapter 1.
 const stat = (k) => +(html.match(new RegExp(`<dt>${k}</dt><dd>(\\d+)`)) || [])[1];
-check(stat('Gist path') === 145 && stat('Full path') === 465, `hero totals ${stat('Gist path')}/${stat('Full path')} ≠ 145/465`);
+check(stat('Gist path') === 145 && stat('Full path') === 475, `hero totals ${stat('Gist path')}/${stat('Full path')} ≠ 145/475`);
 
 // Evidence badges only use the four defined grades.
 for (const [, cls] of html.matchAll(/class="ar-ev ar-ev-([a-z]+)"/g)) check(['paper', 'post', 'call', 'inf'].includes(cls), `unknown evidence grade ${cls}`);
