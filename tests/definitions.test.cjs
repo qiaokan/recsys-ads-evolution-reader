@@ -11,6 +11,7 @@ const unent = (s) => s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt
 const body = unent(src
   .replace(/<x-tex[^>]*>[\s\S]*?<\/x-tex>/g, ' ')
   .replace(/<!--[\s\S]*?-->/g, ' ')
+  .replace(/<code>[\s\S]*?<\/code>/g, ' ') // API identifiers, not prose abbreviations
   .replace(/<a\b[^>]*href="https?:[^"]*"[^>]*>[\s\S]*?<\/a>/g, ' ') // cited titles are quoted, not our prose
   .replace(/<[^>]+>/g, ' '));
 
